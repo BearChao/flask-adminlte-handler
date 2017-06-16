@@ -66,19 +66,11 @@ def common_edit(DynamicModel, form, view):
     return render_template(view, form=form, current_user=current_user)
 
 
-# 根目录跳转
+# 首页跳转
 @main.route('/', methods=['GET'])
-@login_required
-def root():
-    return redirect(url_for('main.index'))
-
-
-# 首页
-@main.route('/index', methods=['GET'])
-@login_required
+#@login_required
 def index():
     return render_template('index.html', current_user=current_user)
-
 
 # 通知方式查询
 @main.route('/notifylist', methods=['GET', 'POST'])
@@ -92,3 +84,7 @@ def notifylist():
 @login_required
 def notifyedit():
     return common_edit(CfgNotify, CfgNotifyForm(), 'notifyedit.html')
+
+@main.route('/json/nav')
+def nav():
+    return render_template('nav.json')

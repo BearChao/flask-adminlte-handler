@@ -1,4 +1,5 @@
-from flask import render_template, redirect, request, url_for, flash
+
+from flask import render_template, redirect, request, url_for, flash, jsonify
 from . import auth
 from .forms import LoginForm
 from app.models import User
@@ -27,4 +28,10 @@ def login():
 def logout():
     logout_user()
     flash('您已退出登录')
-    return redirect(url_for('auth.login'))
+    data = {
+        "referer": "https://liyu365.github.io/BG-UI/",
+        "refresh": "true",
+        "state": "success",
+        "message": "提交成功"
+    }
+    return jsonify(data)
